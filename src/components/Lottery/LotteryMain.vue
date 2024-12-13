@@ -17,11 +17,11 @@ const canvasContainer = ref<HTMLDivElement | null>(null);
 const rotating = ref(false);
 const counter = useCounterStore()
 const {words} = storeToRefs(counter)
-const lotteryResult = ref()
+
 const fireworks = ref<any>([])
-const speedX = ref(0.02)
-const speedY = ref(0.02)
+
 const canvas = ref<any>()
+
 function triggerAction() {
   rotating.value = !rotating.value;
   if (!rotating.value) {
@@ -77,6 +77,7 @@ function createTextSphere() {
   fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', (font) => {
     const radius = 300;
 
+    if (!words.value) return;
     words.value.forEach((word, i) => {
       const geometry = new TextGeometry(word.username, {
         font: font,
@@ -136,7 +137,7 @@ function animateFireworks(canvas: any) {
   // 启动烟花爆炸
   for (let i = 0; i < 50; i++) {
     const x = threeContainer.value?.clientWidth;
-    const y = threeContainer.value?.clientHeight/2;
+    const y = threeContainer.value?.clientHeight / 2;
     const color = colors[Math.floor(Math.random() * colors.length)];
     fireworks.value.push(createParticle(x, y, color));
   }

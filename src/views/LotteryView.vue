@@ -7,13 +7,16 @@ import {useCounterStore} from "@/stores/counter.ts";
 const buttonLabel = ref("开始抽奖");
 const childRef = ref<InstanceType<typeof LotteryMain> | null>(null);
 const counter = useCounterStore()
+counter.GetStudents()
+counter.GetHistory()
+
 function triggerChildMethod() {
   if (counter.words.length > 0) {
     if (buttonLabel.value == "开始抽奖") {
       buttonLabel.value = "停止抽奖";
     }else {
       buttonLabel.value = "开始抽奖";
-      console.log(counter.startLottery)
+      counter.startLottery()
     }
     childRef.value?.triggerAction();
   }else {

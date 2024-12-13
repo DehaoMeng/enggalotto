@@ -4,7 +4,6 @@ import type {Lottery} from "@/types";
 
 // 上传学生名单
 export const uploadExcel = (data: any) => {
-    // 管理员
     return service({
         url: '/list/upload',
         method: 'post',
@@ -12,10 +11,15 @@ export const uploadExcel = (data: any) => {
     })
 }
 
+export const getStudents = () => {
+    return service({
+        url: '/list/students',
+        method: "GET"
+    })
+}
 
 // 清空学生名单记录
 export const clearList = () => {
-
     return service({
         url: "/list/clear",
         method: 'DELETE',

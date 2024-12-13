@@ -1,42 +1,53 @@
 <script setup lang="ts">
 
+import {useCounterStore} from "@/stores/counter.ts";
+import {storeToRefs} from "pinia";
+
+const counterStore = useCounterStore();
+const {firstPrize, secondPrize, thirdPrize} = storeToRefs(counterStore);
 </script>
 
 <template>
   <div class="pyramid-container">
+    <el-text style="font-size: 20px">中奖区域</el-text>
     <!-- 顶层 -->
     <div class="pyramid-layer first-lottery">
-      <el-card style="max-width: 480px;width: 150px;height: 120px;text-align: center" shadow="hover">
+      <el-card style="max-width: 480px;width: 150px;height: 120px;text-align: center" shadow="hover"
+               v-if="firstPrize.username !=''">
         <span>一等奖</span>
-        <p>姓名<br/> 学校</p>
+        <p>{{ firstPrize.username }}<br/> {{ firstPrize.school }}{{ firstPrize.grade }}</p>
       </el-card>
     </div>
     <!-- 第二层 -->
     <div class="pyramid-layer">
-      <el-card v-for="n in 2" :key="n" class="card2" style="max-width: 480px" shadow="hover">
+      <el-card v-for="(value,key) in secondPrize.slice(0,2)" :key="key" class="card2" style="max-width: 480px"
+               shadow="hover">
         <span>二等奖</span>
-        <p>姓名:{{n}}<br/> 学校</p>
+        <p>{{ value.username }}<br/> {{ value.school }}{{ value.grade }}</p>
       </el-card>
     </div>
     <!-- 第三层 -->
     <div class="pyramid-layer second-lottery ">
-      <el-card v-for="n in 3" :key="n" class="card2" style="max-width: 480px" shadow="hover">
+      <el-card v-for="(value,key) in secondPrize.slice(2,5)" :key="key" class="card2" style="max-width: 480px"
+               shadow="hover">
         <span>二等奖</span>
-        <p>姓名:{{n}}<br/> 学校</p>
+        <p>{{ value.username }}<br/> {{ value.school }}{{ value.grade }}</p>
       </el-card>
     </div>
     <!-- 第四层 -->
     <div class="pyramid-layer ">
-      <el-card v-for="n in 5" :key="n" class="card3" style="max-width: 200px" shadow="hover">
+      <el-card v-for="(value,key) in thirdPrize.slice(0,5)" :key="key" class="card3" style="max-width: 200px"
+               shadow="hover">
         <span>三等奖</span>
-        <p>姓名:{{n}}<br/> 学校</p>
+        <p>{{ value.username }}<br/> {{ value.school }}{{ value.grade }}</p>
       </el-card>
     </div>
     <!-- 底层 -->
     <div class="pyramid-layer ">
-      <el-card v-for="n in 5" :key="n" class="card3" style="max-width: 200px" shadow="hover">
+      <el-card v-for="(value,key) in thirdPrize.slice(5,10)" :key="key" class="card3" style="max-width: 200px"
+               shadow="hover">
         <span>三等奖</span>
-        <p>姓名:{{n}}<br/> 学校</p>
+        <p>{{ value.username }}<br/> {{ value.school }}{{ value.grade }}</p>
       </el-card>
     </div>
   </div>
@@ -66,6 +77,7 @@
   text-align: center;
   font-size: 15px;
 }
+
 .card3 {
   width: 100px;
   height: 120px;
@@ -73,12 +85,15 @@
   align-items: center;
   text-align: center
 }
+
 .first-lottery {
   margin-bottom: 2vh;
 }
+
 .second-lottery {
   margin-bottom: 2vh;
 }
+
 span {
   font-size: 15px;
 }

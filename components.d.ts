@@ -27,6 +27,8 @@ declare module 'vue' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElText: typeof import('element-plus/es')['ElText']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     LotteryMain: typeof import('./src/components/Lottery/LotteryMain.vue')['default']
     LotteryResult: typeof import('./src/components/Lottery/LotteryResult.vue')['default']
     PrizeRecord: typeof import('./src/components/UploadExcel/PrizeRecord.vue')['default']

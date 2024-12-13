@@ -7,12 +7,12 @@ const router = createRouter({
     routes: [
 
         {
-            path: '/',
+            path: '/admin',
             name: "uploadExcel",
             component: UploadExcel,
         },
         {
-            path: '/lottery',
+            path: '/',
             name: 'lottery',
             component: LotteryView,
         }
