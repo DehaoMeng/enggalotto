@@ -11,7 +11,7 @@ counter.GetStudents()
 counter.GetHistory()
 
 function triggerChildMethod() {
-  if (counter.words.length > 0) {
+  if (counter.words && counter.words.length > 0) {
     if (buttonLabel.value == "开始抽奖") {
       buttonLabel.value = "停止抽奖";
     }else {

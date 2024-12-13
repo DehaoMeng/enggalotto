@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import * as THREE from 'three';
-import {onMounted, onBeforeUnmount, ref} from 'vue';
+import {onMounted, onBeforeUnmount, ref, watch} from 'vue';
 import {FontLoader} from 'three/addons/loaders/FontLoader.js';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 import {storeToRefs} from "pinia";
@@ -21,7 +21,12 @@ const {words} = storeToRefs(counter)
 const fireworks = ref<any>([])
 
 const canvas = ref<any>()
+watch(words, () => {
+  createTextSphere();
 
+  // 动画循环
+  animate();
+})
 function triggerAction() {
   rotating.value = !rotating.value;
   if (!rotating.value) {
@@ -74,14 +79,14 @@ function initThree() {
 
 function createTextSphere() {
   const fontLoader = new FontLoader();
-  fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', (font) => {
+  fontLoader.load('/font/chinese_font.json', (font) => {
     const radius = 300;
 
     if (!words.value) return;
     words.value.forEach((word, i) => {
       const geometry = new TextGeometry(word.username, {
         font: font,
-        size: 20,
+        size: 25,
         depth: 2,
       });
 
@@ -89,6 +94,7 @@ function createTextSphere() {
       const textMesh = new THREE.Mesh(geometry, material);
 
       // 将文字均匀分布在球面上
+      if (!words.value) return
       const phi = Math.acos(-1 + (2 * i) / words.value.length); // 极角 (0 - π)
       const theta = Math.sqrt(words.value.length * Math.PI) * phi; // 方位角 (0 - 2π)
 
@@ -136,7 +142,9 @@ function animateFireworks(canvas: any) {
 
   // 启动烟花爆炸
   for (let i = 0; i < 50; i++) {
+    if (!threeContainer.value?.clientWidth) return
     const x = threeContainer.value?.clientWidth;
+    if (threeContainer.value?.clientHeight) return
     const y = threeContainer.value?.clientHeight / 2;
     const color = colors[Math.floor(Math.random() * colors.length)];
     fireworks.value.push(createParticle(x, y, color));

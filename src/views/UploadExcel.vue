@@ -18,7 +18,7 @@ const onClearLottery = () => {
     counterStore.history = []
     console.log("清楚历史记录")
     ElMessage({
-      tye: "success",
+      type: "success",
       message: '清楚历史记录',
     })
   }).catch(err => {

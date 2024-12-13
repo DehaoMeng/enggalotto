@@ -3,7 +3,7 @@ import type {AxiosError, AxiosResponse, InternalAxiosRequestConfig} from "axios"
 // import type {CustomResponse} from "@/types/response";
 
 const service = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'http://kedaya.love:8000/api',
     timeout: 5000,
     headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"

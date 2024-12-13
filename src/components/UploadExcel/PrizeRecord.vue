@@ -31,7 +31,7 @@ const filterTableData = computed(() => {
       <el-table-column label="学校" prop="grade"/>
       <el-table-column label="奖项" prop="prize"/>
       <el-table-column label="时间" prop="date"/>
-      <el-table-column width="300vw">
+      <el-table-column width="140vw">
         <template #header>
           <el-input v-model="search" size="small" placeholder="输入姓名查找"/>
         </template>

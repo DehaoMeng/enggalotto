@@ -58,13 +58,13 @@ export const useCounterStore = defineStore('counter', () => {
     const GetStudents = () => {
         // 获取学生名单
         getStudents().then((res) => {
-            console.log(res)
+            words.value = res.data.Message
         })
     }
     const GetHistory = () => {
         // 获取记录 返回记录
         getHistory().then(res => {
-            console.log(res)
+            history.value = res.data.result[1]
         })
     }
 
