@@ -11,7 +11,7 @@ counter.GetStudents()
 counter.GetHistory()
 
 function triggerChildMethod() {
-  if (counter.words && counter.words.length > 0) {
+  if (counter.words && counter.words.length > 0 && counter.firstPrize.username == '') {
     if (buttonLabel.value == "开始抽奖") {
       buttonLabel.value = "停止抽奖";
     }else {
@@ -42,7 +42,7 @@ function triggerChildMethod() {
     <el-main class="layout-main">
       <div class="main-content">
         <LotteryMain  ref="childRef"/>
-        <LotteryResult style="width: 40vw;height: 100%" />
+        <LotteryResult style="width: 60vw;height: 100%" />
       </div>
     </el-main>
   </el-container>

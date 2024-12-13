@@ -70,8 +70,8 @@ const {firstPrize, secondPrize, thirdPrize} = storeToRefs(counterStore);
 }
 
 .card2 {
-  width: 150px;
-  height: 100px;
+  width: 120px;
+  height: 140px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -79,8 +79,8 @@ const {firstPrize, secondPrize, thirdPrize} = storeToRefs(counterStore);
 }
 
 .card3 {
-  width: 100px;
-  height: 120px;
+  width: 120px;
+  height: 140px;
   justify-content: center;
   align-items: center;
   text-align: center
