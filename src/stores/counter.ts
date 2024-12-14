@@ -4,7 +4,7 @@ import type {Lottery, Student} from "@/types";
 import {getHistory, getStudents, uploadLottery} from "@/request/api.ts";
 
 export const useCounterStore = defineStore('counter', () => {
-    const words = ref<Student[]>()
+    const words = ref<Student[]>([])
 
     const history = ref<Lottery[]>()
 
@@ -55,10 +55,13 @@ export const useCounterStore = defineStore('counter', () => {
         })
     }
 
-    const GetStudents = () => {
+    const GetStudents =  (func: Function) => {
         // 获取学生名单
         getStudents().then((res) => {
-            words.value = res.data.Message
+            res.data.Message.forEach((item: Student) => {
+                words.value.push(item)
+            })
+            func()
         })
     }
     const GetHistory = () => {

@@ -7,7 +7,7 @@ import {useCounterStore} from "@/stores/counter.ts";
 const buttonLabel = ref("开始抽奖");
 const childRef = ref<InstanceType<typeof LotteryMain> | null>(null);
 const counter = useCounterStore()
-counter.GetStudents()
+counter.GetStudents(()=>{})
 counter.GetHistory()
 
 function triggerChildMethod() {

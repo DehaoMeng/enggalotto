@@ -10,7 +10,7 @@ import type {UploadFile} from "element-plus";
 
 const router = useRouter();
 const counterStore = useCounterStore();
-counterStore.GetStudents()
+counterStore.GetStudents(()=>{})
 counterStore.GetHistory()
 const onClearLottery = () => {
   // 清空中奖记录
@@ -37,7 +37,7 @@ const onClearStudents = () => {
 
 
 const onSuccess = (_: any, uploadFile: UploadFile) => {
-  counterStore.GetStudents()
+  counterStore.GetStudents(()=>{})
   ElMessage({type: "success", message: uploadFile.name + "上传成功！"})
 }
 const onError = (_: Error, uploadFile: UploadFile) => {
@@ -53,7 +53,7 @@ const onError = (_: Error, uploadFile: UploadFile) => {
       <el-upload
           ref="upload"
           class="upload-demo"
-          action="http://kedaya.love:8000/api/upload"
+          action="https://kedaya.love:8000/api/upload"
           accept=".xls,.xlsx"
           :auto-upload="true"
           :on-success="onSuccess"

@@ -1,13 +1,13 @@
 <template>
   <div ref="threeContainer" class="three-container"></div>
   <div ref="canvasContainer" class="canvas-container"></div>
-
 </template>
 
 <script lang="ts" setup>
 import * as THREE from 'three';
 import {onMounted, onBeforeUnmount, ref, watch} from 'vue';
 import {FontLoader} from 'three/addons/loaders/FontLoader.js';
+
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 import {storeToRefs} from "pinia";
 import {useCounterStore} from "@/stores/counter.ts";
@@ -21,18 +21,11 @@ const {words} = storeToRefs(counter)
 const fireworks = ref<any>([])
 
 const canvas = ref<any>()
-watch(words, () => {
-  createTextSphere();
 
-  // 动画循环
-  animate();
-})
 function triggerAction() {
   rotating.value = !rotating.value;
   if (!rotating.value) {
     triggerFireworks();
-    cleanupThree();
-    initThree()
   }
 }
 
@@ -44,7 +37,7 @@ let camera: THREE.PerspectiveCamera;
 let animationId: number;
 
 onMounted(() => {
-  initThree();
+  counter.GetStudents(initThree)
   canvas.value = createFireworksCanvas();
 });
 
@@ -139,18 +132,16 @@ function triggerFireworks() {
 function animateFireworks(canvas: any) {
   const ctx = canvas.getContext('2d');
   const colors = ['#ff007f', '#ffbf00', '#00ff00', '#00bfff', '#8a2be2', '#ff4500'];
-
+  console.log('sad')
   // 启动烟花爆炸
   for (let i = 0; i < 50; i++) {
-    if (!threeContainer.value?.clientWidth) return
-    const x = threeContainer.value?.clientWidth;
-    if (threeContainer.value?.clientHeight) return
-    const y = threeContainer.value?.clientHeight / 2;
+    const x = canvas.clientWidth/2;
+    const y = canvas.clientHeight / 2;
     const color = colors[Math.floor(Math.random() * colors.length)];
     fireworks.value.push(createParticle(x, y, color));
   }
 
-  const animate = () => {
+  const animate1 = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     fireworks.value.forEach((particle: any, index: number) => {
       particle?.update();
@@ -164,15 +155,16 @@ function animateFireworks(canvas: any) {
 
     // 如果有烟花粒子继续存在，继续动画
     if (fireworks.value.length > 0) {
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animate1);
     }
   };
 
-  animate();
+  animate1();
 }
 
 
 function createFireworksCanvas() {
+  console.log("Canvas Created")
   const canvas = document.createElement('canvas');
   canvasContainer.value?.appendChild(canvas);
   let fireworksCanvas = canvas;
