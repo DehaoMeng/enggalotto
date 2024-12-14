@@ -53,7 +53,7 @@ const onError = (_: Error, uploadFile: UploadFile) => {
       <el-upload
           ref="upload"
           class="upload-demo"
-          action="http://127.0.0.1:8000//list/upload"
+          action="http://kedaya.love:8000/api/upload"
           accept=".xls,.xlsx"
           :auto-upload="true"
           :on-success="onSuccess"
